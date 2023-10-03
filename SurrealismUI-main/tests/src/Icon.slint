@@ -1,0 +1,129 @@
+import {SURIcon} from "../../index.slint";
+import {IconSources,Size,Themes} from "../../themes/index.slint";
+export component TestIcon inherits Window {
+  height: 400px;
+  width: 400px;
+  GridLayout {
+    spacing: 40px;
+    Row{
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/sd-card.svg");
+        theme: Themes.Primary;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/add-computer.svg");
+        theme: Themes.Success;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/yep.svg");
+        theme: Themes.Error;
+      }
+      SURIcon{
+        icon: @image-url("../../icons/t-shirt.svg");
+        theme: Themes.Dark;
+        height: 30px;
+        width: 30px;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/video-conference.svg");
+        theme: Themes.Info;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon:@image-url("../../icons/vacation.svg");
+        theme: Themes.Warning;
+        clicked=>{
+          debug("clicked");
+          self.theme= Themes.Error;
+          self.height += 2px;
+          self.width += 2px;
+        }
+      }
+    }
+    Row{
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/cake-five.svg");
+        theme: Themes.Primary;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/label.svg");
+        theme: Themes.Success;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/wifi.svg");
+        theme: Themes.Error;
+      }
+      SURIcon{
+        icon: @image-url("../../icons/wallet-one.svg");
+        theme: Themes.Dark;
+        height: 30px;
+        width: 30px;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/game-console.svg");
+        theme: Themes.Info;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/qiyehao.svg");
+        theme: Themes.Warning;
+      }
+    }
+    Row{
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/scanning-two.svg");
+        theme: Themes.Primary;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/oceanengine.svg");
+        theme: Themes.Success;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/zoom-internal.svg");
+        theme: Themes.Error;
+      }
+      SURIcon{
+        icon: @image-url("../../icons/zip.svg");
+        theme: Themes.Dark;
+        height: 30px;
+        width: 30px;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/f-eight-key.svg");
+        theme: Themes.Info;
+      }
+      SURIcon{
+        height: 30px;
+        width: 30px;
+        icon: @image-url("../../icons/pacifier.svg");
+        theme: Themes.Warning;
+      }
+    }
+  }
+}

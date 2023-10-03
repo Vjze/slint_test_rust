@@ -1,0 +1,17 @@
+import {SURRadio} from "../../index.slint";
+import {Themes} from "../../themes/index.slint";
+
+component TestCollection inherits Window {
+  height: 560px;
+  width: 600px;
+  
+  SURRadio{
+    y: 60px;
+  }
+
+  SURRadio{
+    y: 180px;
+    active-color : #4affae;
+    theme:Primary;
+  }
+}

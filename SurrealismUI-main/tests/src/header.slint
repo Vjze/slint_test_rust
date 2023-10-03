@@ -1,0 +1,38 @@
+import {SURHeader,Route} from "../../index.slint";
+import {Themes} from "../../themes/index.slint";
+
+component TestWindow inherits Window {
+  height: 400px;
+  width: 660px;
+  SURHeader {
+    x:10px;
+    y: 40px;
+  }
+  SURHeader {
+    x:10px;
+    y: 100px;
+    theme: Error;
+    route:{
+      home:"slint",routes:["components","dist","v1.2.0"]
+    };
+  }
+  SURHeader {
+    x:10px;
+    y: 160px;
+    theme: Primary;
+    to(index,route)=>{
+      txt.name = route;
+      txt.index = index;
+    }
+    back=>{
+      txt.name = "back";
+    }
+  }
+  txt:=Text{
+    y: 260px;
+    font-size: 18px;
+    in-out property <int> index;
+    in-out property <string> name;
+    text: "route-index:" + index + " route-name:" + name;
+  }
+}

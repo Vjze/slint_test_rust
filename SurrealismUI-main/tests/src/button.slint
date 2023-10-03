@@ -1,0 +1,57 @@
+import {SURButton} from "/index.slint";
+import {Themes,IconSources} from "/themes/index.slint";
+component TestButton inherits Window {
+  height: 400px;
+  width: 400px;
+  SURButton {
+    x: 20px;
+    y: 10px;
+    
+    theme:Themes.Dark;
+    icon:@image-url("../../icons/safe-retrieval.svg");
+    clicked => {
+      self.content = "clicked"
+    }
+  }
+  SURButton {
+    x: 260px;
+    y: 10px;
+
+    content:"Save";
+    clicked => {
+      self.content = "clicked"
+    }
+  }
+  SURButton {
+    x: 20px;
+    y: 100px;
+    content:"Success";
+    theme:Themes.Success;
+
+  }
+  SURButton {
+    x: 20px;
+    y: 200px;
+    content:"Primary";
+    theme:Themes.Primary;
+  }
+  SURButton {
+    x: 20px;
+    y: 300px;
+    content:"Info";
+    theme:Themes.Info;
+  }
+  SURButton {
+    x: 200px;
+    y: 100px;
+    content:"Error?";
+    theme:Themes.Error;
+    icon:@image-url("../../icons/magic-hat.svg");
+  }
+  SURButton {
+    x: 200px;
+    y: 200px;
+    
+    theme:Themes.Warning;
+  }
+}

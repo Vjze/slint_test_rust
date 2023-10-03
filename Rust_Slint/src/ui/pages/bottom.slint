@@ -1,0 +1,21 @@
+import { StyleMetrics} from "std-widgets.slint";
+export global QueryTime {
+    in property <float> time;
+}
+
+export component Time inherits Rectangle{
+    in property <float> time <=> QueryTime.time;
+    background: StyleMetrics.window-background;
+    vertical-stretch: 0;
+    HorizontalLayout {
+        opacity: 0.85;
+            Text {
+                text: "本次查询用时："+time+"秒";
+                font-size: 14px;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+                font-weight: 550;
+                
+            }
+        }
+    }

@@ -1,0 +1,33 @@
+export global DateTimeAdapter {
+    in property <string> date: "Set 26, Aug 2023";
+    in property <string> time: "15:20:00";
+}
+
+export component DateTime {
+    in property <string> date <=> DateTimeAdapter.date;
+    in property <string> time <=> DateTimeAdapter.time;
+
+    min-height: 20px;
+    vertical-stretch: 0;
+    VerticalLayout {
+        padding: 25px;
+            Text {
+                text: date;
+                font-size: 15px;
+                vertical-alignment: bottom;
+                horizontal-alignment: center;
+                font-weight: 550;
+                
+            }
+        }
+        VerticalLayout {
+            padding: 5px;
+            Text {
+                vertical-alignment: bottom;
+                text: time;
+                font-size: 16px;
+                horizontal-alignment: center;
+                font-weight: 550;
+            }
+         }
+    }

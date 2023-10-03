@@ -1,0 +1,50 @@
+import { StandardButton } from "std-widgets.slint";
+import {SURDialog} from "../../../../SurrealismUI-main/index.slint";
+export component Dia inherits Rectangle {
+  callback show_confirm_popup;
+  show_confirm_popup => { confirm_popup.open(); }
+  confirm_popup:=SURDialog {
+    dialog-title: "提示";
+    dialog-details : "输入框不能为空，请输入SN或者箱号、盒号再进行查询！";
+    confirm-btn-theme: Warning;
+    dialog-width:80%;
+    dialog-height:50%;
+    // do after confirm btn clicked
+    // confirm=>{
+    //   // debug("confirm btn clicked~!")
+    //   confirm-popup.close()
+    // }
+    // cancel => {
+    //   confirm-popup.open()
+    // }
+  }
+//   confirm_popup := PopupWindow {
+//     x: 760px;
+//     y: 385px;
+    
+//     width: min(confirm_popup_layout.preferred-width, root.width - 40px);
+//     Rectangle {
+//         // background: root.background;
+//         background: #535353;
+//         border-color: confirm_popup_text.color;
+//         // border-width: 1px;
+//     }
+    
+//     confirm_popup_layout := Dialog {
+//         height:100%; width: 100%;
+//         VerticalLayout {
+//           spacing: 15px;
+//         confirm_popup_text := Text {
+//             text: "输入框不能为空，请输入SN或者箱号、盒号再进行查询！";
+//             wrap: word-wrap;
+//             font-size: 15px;
+//         }
+//         HorizontalLayout {
+          
+//         StandardButton { kind: yes;  }
+//         StandardButton { kind: cancel; }
+//         }
+//     }
+//   }
+// }
+}

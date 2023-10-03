@@ -1,0 +1,21 @@
+import { StyleMetrics } from "std-widgets.slint";
+import { SideBar} from "ui/side_bar.slint";
+import { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime} from "ui/pages/query.slint";
+export { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime}
+export component App inherits Window {
+    // width: 1240px;
+    // height: 760px;
+    icon: @image-url("ui/reso/logo.png");
+    callback show_confirm_popup <=> dia.show_confirm_popup;
+    background: StyleMetrics.window-background;
+    title: @tr("Slint_Tools");
+    HorizontalLayout {
+        side-bar := SideBar {
+            title: @tr("功能选择");
+            model: [@tr("Menu" => "查询"), @tr("Menu" => "绑定"), @tr("Menu" => "工单"), @tr("Menu" => "Todo"), @tr("Menu" => "About")];
+        }
+
+        if(side-bar.current-item == 0) : QueryPage {}
+    }
+    dia := Dia { }
+}
