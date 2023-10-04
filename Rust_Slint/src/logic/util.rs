@@ -1,7 +1,6 @@
 use tiberius::{AuthMethod, Client, Config};
 use tokio::net::TcpStream;
 use tokio_util::compat::{Compat, TokioAsyncWriteCompatExt};
-// use async_std::net::TcpStream;
 
 pub async fn client() -> Client<Compat<TcpStream>> {
     let mut config = Config::new();

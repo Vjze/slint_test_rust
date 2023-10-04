@@ -26,10 +26,17 @@ impl CargoWorker {
         let worker_thread = std::thread::spawn({
             let handle_weak = query.as_weak();
             move || {
-                tokio::runtime::Runtime::new()
-                    .unwrap()
-                    .block_on(query_worker_loop(r, handle_weak))
-                    .unwrap()
+                // tokio::runtime::Runtime::new()
+                //     .unwrap()
+                //     .block_on(query_worker_loop(r, handle_weak))
+                //     .unwrap()
+                let rt = tokio::runtime::Builder::new_multi_thread()
+                .enable_all()
+                .build()
+                .unwrap();
+                rt.block_on(query_worker_loop(r, handle_weak))
+                .unwrap()
+                
             }
         });
         Self {
