@@ -22,8 +22,27 @@ async fn main() {
             }
         }
     });
+    app.global::<InfosData>().on_sort_descending({
+        let cargo_channel = cargo_worker.channel.clone();
+        move |index| {
+            cargo_channel
+                .send(get_result::QueryMessage::SortDescending { index })
+                .unwrap()
+        }
+    });
+    app.global::<InfosData>().on_sort_ascending({
+        let cargo_channel = cargo_worker.channel.clone();
+        move |index| {
+            cargo_channel
+                .send(get_result::QueryMessage::SortAscending { index })
+                .unwrap()
+        }
+    });
     let window = app.as_weak();
-    window.unwrap().global::<InfosData>().set_version(APP_VERSION.into());
+    window
+        .unwrap()
+        .global::<InfosData>()
+        .set_version(APP_VERSION.into());
     app.run().unwrap();
     cargo_worker.join().unwrap();
 }

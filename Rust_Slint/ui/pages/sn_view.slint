@@ -1,0 +1,187 @@
+import {GroupBox,ComboBox, ListView,Button, LineEdit, StandardTableView} from "std-widgets.slint";
+import { SURButton,SURInput } from "../../../../SurrealismUI-main/index.slint";
+import { Themes,IconSources } from "../../../../SurrealismUI-main/themes/index.slint";
+import { Time } from "bottom.slint";
+export struct Action  {
+    type: string,
+    text: string,
+}
+export struct Infos_Box {
+    box_sn: string,
+    sn: string,
+    pn: string,
+    order: string,
+    workerid: string,
+    date: string,
+}
+export struct Infos_Sn {
+    sn: string,
+    productBill: string,
+    testType: string,
+    result: string,
+    ith: string,
+    pf: string,
+    vop: string,
+    im: string,
+    rs: string,
+    sen: string,
+    res: string,
+    icc: string,
+    idark: string,
+    vbr:string,
+    ixtalk: string,
+    kink: string,
+    testdate: string,
+}
+export global InfosData {
+    callback sort_ascending(int);
+    callback sort_descending(int);
+    callback query(Action);
+    in-out property<[Infos_Box]> datas_box;
+    in-out property<[Infos_Sn]> datas_sn;
+    in-out property <string> text;
+    in-out property <[[StandardListViewItem]]> list;
+    in-out property <string> version;
+
+}
+
+export component QueryPage inherits Rectangle {
+    VerticalLayout {
+        // spacing: 15px;
+        HorizontalLayout {
+            height: 50px;
+            alignment: start;
+            spacing :20px;
+            text-edit :=LineEdit {
+                y:10px;
+                height: 30px;
+                placeholder-text : @tr("输入条码....");
+                accepted => {
+                    query.clicked();
+                    
+                }
+                // theme:Themes.Warning;
+                // clearable:true;
+
+            }
+
+            text-edit-clean := SURButton{
+                y:10px;
+                height: 30px;
+                content: "";
+                icon: @image-url("../../../../SurrealismUI-main/icons/clear.svg");
+                clicked => {
+                    text-edit.text = ""
+                }
+            }
+            
+            mode_cb := ComboBox {
+                y:10px;
+                height: 32px;
+                current_index: 0;
+                model: [@tr("SN"), @tr("Box"),@tr("Carton"), @tr("Worker_ID"), @tr("Date")];
+                
+
+            }
+        
+            query := SURButton {
+                // theme: Light;
+                y:10px;
+                width: 70px;
+                height: 32px;
+                icon: @image-url("../../../../SurrealismUI-main/icons/search.svg");
+                content: @tr(" 查询 ");
+                clicked => {
+                    InfosData.query({
+                    type:mode-cb.current-value,
+                    text:text-edit.text
+                    })
+                }
+                
+                font-size: 14px;
+                font-weight: 650;
+                letter-spacing: 2px;
+            }
+        
+            text := Rectangle {
+                Text{
+                   text : @tr("数量：{}",InfosData.text);
+                   font-size: 15px;
+                   font-weight: 650;
+                }
+                 
+                
+            }
+        
+        }
+        
+        if mode-cb.current-index == 0 : StandardTableView{
+            sort-ascending(index) => {
+                InfosData.sort_ascending(index);
+            }
+
+            sort-descending(index) => {
+                InfosData.sort-descending(index);
+            }
+            height: root.height*0.9;
+            columns: [
+                {title: @tr("SN")},
+                {title: @tr("工号")},
+                {title: @tr("料号")},
+                {title: @tr("结果")},
+                {title: @tr("Ith")},
+                {title: @tr("Pf")},
+                {title: @tr("Vop")},
+                {title: @tr("Im")},
+                {title: @tr("Rs")},
+                {title: @tr("Sen")},
+                {title: @tr("Res")},
+                {title: @tr("ICC")},
+                {title: @tr("Idark")},
+                {title: @tr("Vbr")},
+                {title: @tr("IXtalk")},
+                {title: @tr("Kink")},
+                {title: @tr("TestDate")},
+            ];
+            rows: InfosData.list;
+        }
+        if mode-cb.current-index == 1 : StandardTableView { 
+            sort-ascending(index) => {
+                InfosData.sort_ascending(index);
+            }
+
+            sort-descending(index) => {
+                InfosData.sort-descending(index);
+            }
+            height: root.height*0.9;
+            columns: [
+                {title: @tr("盒号")},
+                            {title: @tr("SN")},
+                            {title: @tr("料号")},
+                            {title: @tr("工单号")},
+                            {title: @tr("操作员")},
+                            {title: @tr("装盒时间")},
+            ];
+            rows: InfosData.list;
+         }
+         HorizontalLayout {
+            HorizontalLayout {
+                alignment: end;
+                vertical-stretch:1;
+                Time {}
+            }
+            HorizontalLayout {
+                alignment: end;
+                Text{
+                    text : @tr("当前版本：{}",InfosData.version);
+                    font-size: 14px;
+                    vertical-alignment: center;
+                    horizontal-alignment: center;
+                    font-weight: 550;
+                 }
+            }
+        }
+        
+    }
+}
+    

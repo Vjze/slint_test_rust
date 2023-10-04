@@ -1,5 +1,5 @@
 import { StyleMetrics } from "std-widgets.slint";
-import { SideBar} from "ui/side_bar.slint";
+import { MenuBar} from "ui/menubar.slint";
 import { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime} from "ui/pages/query.slint";
 export { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime}
 export component App inherits Window {
@@ -10,12 +10,14 @@ export component App inherits Window {
     background: StyleMetrics.window-background;
     title: @tr("Slint_Tools");
     HorizontalLayout {
-        side-bar := SideBar {
-            title: @tr("功能选择");
-            model: [@tr("Menu" => "查询"), @tr("Menu" => "绑定"), @tr("Menu" => "工单"), @tr("Menu" => "Todo"), @tr("Menu" => "About")];
-        }
+        menu := MenuBar {}
 
-        if(side-bar.current-item == 0) : QueryPage {}
+        // side-bar := SideBar {
+        //     title: @tr("功能选择");
+        //     model: [@tr("Menu" => "查询"), @tr("Menu" => "绑定"), @tr("Menu" => "工单"), @tr("Menu" => "Todo"), @tr("Menu" => "About")];
+        // }
+
+        if(menu.active == 0) : QueryPage {}
     }
     dia := Dia { }
 }

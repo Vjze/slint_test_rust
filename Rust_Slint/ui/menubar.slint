@@ -1,0 +1,135 @@
+import { StyleMetrics,Switch , GroupBox} from "std-widgets.slint";
+import { DateTime } from "pages/datetime.slint";
+
+struct Palette  {
+    menuBar : brush,
+    mainContent : brush,
+    box : brush,
+    lightDisplay : brush,
+    pieChart : brush,
+    roundButton : brush,
+    weekdayBox : brush,
+    text : brush,
+    shadow : brush,
+}
+global Skin  {
+    in property<bool> day: !StyleMetrics.dark-color-scheme;
+    out property<Palette> palette : root.day ? {
+       menuBar : #6D7BFB,
+       text : #000,
+    } : {
+       menuBar : #2937A7,
+       text : #fff,
+    };
+
+    out property <length> DefaultFont: 14px;
+}
+component MenuItem inherits Rectangle {
+    callback clicked <=> ma.clicked;
+    in property <image> icon <=> i.source;
+    in property<string> name <=> t.text;
+    in-out property<bool> selected;
+    in property<bool> has-focus;
+    background: root.selected ? rgba(100%, 100%, 100%, 14%) : ma.has-hover ? rgba(100%, 100%, 100%, 9%) : transparent;
+    ma := TouchArea {}
+    HorizontalLayout {
+        alignment: start;
+        spacing: 6px;
+        padding: 8px;
+        padding-left: 30px;
+        padding-right: 30px;
+        i := Image {
+            width: 15px; 
+            height: self.source.height * 1.4px;
+        }
+        t := Text {
+            font-size: Skin.DefaultFont;
+        }
+    }
+}
+struct info {
+    name:string,
+    icon:image
+}
+export component MenuBar inherits Rectangle {
+    background: Skin.palette.menuBar;
+    in property<[info]> model: 
+        [
+            { name: "查询功能合集", icon: @image-url("reso/dashboard.svg") },
+            { name: "todo", icon: @image-url("reso/rooms.png") },
+            { name: "todo", icon: @image-url("reso/devices.png") },
+            { name: "todo", icon: @image-url("reso/statistics.png") },
+            { name: "todo", icon: @image-url("reso/storage.png") },
+            { name: "todo", icon: @image-url("reso/members.png") },
+        ]
+    ;
+    in-out property<int> active : 0;
+    out property<int> current-focused: fs.has-focus ? fs.focused-tab : -1;
+    width: 180px;
+    forward-focus: fs;
+    accessible-role: tab;
+    accessible-delegate-focus: root.current-focused >= 0 ? root.current-focused : root.active;
+    Rectangle {
+        // background: StyleMetrics.window-background.darker(0.2);
+
+        fs := FocusScope {
+            x:0;
+            width: 0px; // Do not react on clicks
+            property<int> focused-tab: 0;
+
+            key-pressed(event) => {
+                if (event.text == "\n") {
+                     root.active = root.current-focused;
+                     return accept;
+                }
+                if (event.text == Key.UpArrow) {
+                     self.focused-tab = Math.max(self.focused-tab - 1,  0);
+                     return accept;
+                }
+                if (event.text == Key.DownArrow) {
+                     self.focused-tab = Math.min(self.focused-tab + 1, root.model.length - 1);
+                     return accept;
+                }
+                return reject;
+            }
+
+            key-released(event) => {
+                if (event.text == " ") {
+                     root.active = root.current-focused;
+                     return accept;
+                }
+                return reject;
+            }
+        }
+    }
+
+    VerticalLayout {
+        padding-left: 0px;
+        padding-top: 35px;
+        padding-right: 0px;
+        padding-bottom: 12px;
+        spacing: 8px;
+        VerticalLayout {
+            padding-left: 50px;
+            padding-top: 0px;
+            padding-right: 50px;
+            padding-bottom: 54px;
+
+            Image {
+                source: @image-url("reso/main-icon.svg");
+                height: self.source.height * 1.5px;
+            }
+        }
+        for entry[active] in model : MenuItem {
+            name: entry.name;
+            icon: entry.icon;
+            selected: active == root.active;
+            has-focus: active == root.current-focused;
+            clicked => { root.active = active; }
+        }
+        Rectangle {}
+        DateTime { }
+    }
+}
+
+

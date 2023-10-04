@@ -1,6 +1,5 @@
 use std::rc::Rc;
 
-use crate::generated_code::{Infos_Box, Infos_Sn};
 use crate::logic::util::{client, sn_client};
 use slint::{VecModel, StandardListViewItem};
 // use ::chrono::Local;
