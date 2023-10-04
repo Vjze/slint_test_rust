@@ -1,6 +1,6 @@
 import {GroupBox,ComboBox, ListView,Button, LineEdit, StandardTableView} from "std-widgets.slint";
-import { SURButton,SURInput } from "../../../../SurrealismUI-main/index.slint";
-import { Themes,IconSources } from "../../../../SurrealismUI-main/themes/index.slint";
+import { SURButton,SURInput } from "../../../SurrealismUI-main/index.slint";
+import { Themes,IconSources } from "../../../SurrealismUI-main/themes/index.slint";
 import { Time } from "bottom.slint";
 export struct Action  {
     type: string,
@@ -69,7 +69,7 @@ export component QueryPage inherits Rectangle {
                 y:10px;
                 height: 30px;
                 content: "";
-                icon: @image-url("../../../../SurrealismUI-main/icons/clear.svg");
+                icon: @image-url("../../../SurrealismUI-main/icons/clear.svg");
                 clicked => {
                     text-edit.text = ""
                 }
@@ -89,7 +89,7 @@ export component QueryPage inherits Rectangle {
                 y:10px;
                 width: 70px;
                 height: 32px;
-                icon: @image-url("../../../../SurrealismUI-main/icons/search.svg");
+                icon: @image-url("../../../SurrealismUI-main/icons/search.svg");
                 content: @tr(" 查询 ");
                 clicked => {
                     InfosData.query({

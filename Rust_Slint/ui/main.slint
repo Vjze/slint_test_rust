@@ -1,11 +1,11 @@
 import { StyleMetrics } from "std-widgets.slint";
-import { MenuBar} from "ui/menubar.slint";
-import { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime} from "ui/pages/query.slint";
+import { MenuBar} from "menubar.slint";
+import { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime} from "pages/query.slint";
 export { QueryPage,Action,Infos_Box,Infos_Sn,InfosData,DateTimeAdapter,Dia,QueryTime}
 export component App inherits Window {
     // width: 1240px;
     // height: 760px;
-    icon: @image-url("ui/reso/logo.png");
+    icon: @image-url("reso/logo.png");
     callback show_confirm_popup <=> dia.show_confirm_popup;
     background: StyleMetrics.window-background;
     title: @tr("Slint_Tools");
