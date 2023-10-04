@@ -55,7 +55,7 @@ export component QueryPage inherits Rectangle {
             text-edit :=LineEdit {
                 y:10px;
                 height: 30px;
-                placeholder-text : @tr("输入条码....");
+                placeholder-text : @tr("input....");
                 accepted => {
                     query.clicked();
                     
@@ -90,7 +90,7 @@ export component QueryPage inherits Rectangle {
                 width: 70px;
                 height: 32px;
                 icon: @image-url("../../../SurrealismUI-main/icons/search.svg");
-                content: @tr(" 查询 ");
+                content: @tr(" Inquire ");
                 clicked => {
                     InfosData.query({
                     type:mode-cb.current-value,
@@ -105,7 +105,7 @@ export component QueryPage inherits Rectangle {
         
             text := Rectangle {
                 Text{
-                   text : @tr("数量：{}",InfosData.text);
+                   text : @tr("quantity：{}",InfosData.text);
                    font-size: 15px;
                    font-weight: 650;
                 }
@@ -173,7 +173,7 @@ export component QueryPage inherits Rectangle {
             HorizontalLayout {
                 alignment: end;
                 Text{
-                    text : @tr("当前版本：{}",InfosData.version);
+                    text : @tr("Version:{}",InfosData.version);
                     font-size: 14px;
                     vertical-alignment: center;
                     horizontal-alignment: center;
